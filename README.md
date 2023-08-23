@@ -1,5 +1,7 @@
 # Etrack
 
+Project is aimed to control your daily expenses and budget in general using interactive tables, graphs and charts.
+
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 15.0.0.
 
 ## Development server

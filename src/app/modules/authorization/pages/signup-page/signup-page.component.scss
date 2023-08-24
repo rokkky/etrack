@@ -1,0 +1,66 @@
+@import "/src/styles/variables.scss";
+
+.content {
+  background: center / cover no-repeat url("../../../../../assets/login-bg.jpg");
+  height: 100%;
+  color: $lightGrayColor;
+}
+
+section {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 40%;
+  height: 100%;
+  opacity: 99%;
+  background-color: $bgColor;
+  h1 {
+    font-size: $fontSizeLarge * 1.5;
+    letter-spacing: 2px;
+    margin-bottom: $baseSize * 10;
+  }
+  .signup {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-around;
+    width: 60%;
+    form {
+      display: flex;
+      flex-direction: column;
+      width: 100%;
+      mat-form-field {
+        margin-top: $baseSize;
+      }
+      input {
+        color: $lightGrayColor;
+        &::placeholder {
+          color: $subGrayColor4;
+        }
+      }
+      button {
+        padding: $baseSize * 4;
+        margin: $baseSize * 3 0;
+      }
+    }
+  }
+}
+
+hr {
+  width: 90%;
+  margin-top: $baseSize * 2;
+  color: $subGrayColor2;
+}
+
+.login {
+  margin-top: $baseSize;
+  font-size: $fontSizeSmaller;
+  color: $subGrayColor2;
+  text-align: center;
+  span {
+    color: $whiteColor;
+    text-decoration: underline;
+    cursor: pointer;
+  }
+}

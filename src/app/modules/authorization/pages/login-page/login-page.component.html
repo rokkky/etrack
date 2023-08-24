@@ -1,0 +1,42 @@
+<div class="content">
+  <section>
+    <h1>Login to ETrack</h1>
+    <div class="login">
+      <form [formGroup]="loginForm">
+        <label>Email address</label>
+        <mat-form-field appearance="outline">
+          <input
+            type="email"
+            matInput
+            formControlName="email"
+            placeholder="your@email.com"
+          />
+        </mat-form-field>
+        <app-field-error [control]="loginForm.get('email')!" [fieldName]="'Email'"></app-field-error>
+
+        <label>Password</label>
+        <mat-form-field appearance="outline">
+          <input
+            type="password"
+            matInput
+            formControlName="password"
+            placeholder="********"
+          />
+        </mat-form-field>
+        <app-field-error [control]="loginForm.get('password')!" [fieldName]="'Password'"></app-field-error>
+
+        <p class="reset-pass" [ngClass]="{'error-position': loginForm.get('password')!.touched && loginForm.get('password')!.invalid}">
+          Forgot your password?
+          <span (click)="navigateToResetPassPage()">Reset</span>
+        </p>
+
+        <button mat-flat-button color="accent" (click)="loginUser()">Login</button>
+      </form>
+      <hr />
+      <p class="register">
+        Do not have an account yet?
+        <span (click)="navigateToRegisterPage()">Register</span>
+      </p>
+    </div>
+  </section>
+</div>

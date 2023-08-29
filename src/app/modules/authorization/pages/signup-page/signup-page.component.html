@@ -1,0 +1,51 @@
+<div class="content">
+  <section>
+    <h1>Sign up to ETrack</h1>
+    <div class="signup">
+      <form [formGroup]="signupForm">
+        <label>Username</label>
+        <mat-form-field appearance="outline">
+          <input type="text" matInput formControlName="userName" />
+        </mat-form-field>
+        <app-field-error
+          [control]="signupForm.get('userName')!"
+          [fieldName]="'Username'"
+        ></app-field-error>
+
+        <label>Email address</label>
+        <mat-form-field appearance="outline">
+          <input type="email" matInput formControlName="email" placeholder="your@email.com"/>
+        </mat-form-field>
+        <app-field-error
+          [control]="signupForm.get('email')!"
+          [fieldName]="'Email'"
+        ></app-field-error>
+
+        <label>Password</label>
+        <mat-form-field appearance="outline">
+          <input type="password" matInput formControlName="password" placeholder="********"/>
+        </mat-form-field>
+        <app-field-error
+          [control]="signupForm.get('password')!"
+          [fieldName]="'Password'"
+        ></app-field-error>
+
+        <label>Confirm password</label>
+        <mat-form-field appearance="outline">
+          <input type="password" matInput formControlName="confirmPassword" placeholder="********"/>
+        </mat-form-field>
+        <app-field-error
+          [control]="signupForm.get('confirmPassword')!"
+          [fieldName]="'Confirm password'"
+        ></app-field-error>
+
+        <button mat-flat-button color="accent" (click)="signup()">Sign up</button>
+      </form>
+      <hr />
+      <p class="login">
+        Already have an account?
+        <span (click)="navigateToLoginPage()">Login</span>
+      </p>
+    </div>
+  </section>
+</div>

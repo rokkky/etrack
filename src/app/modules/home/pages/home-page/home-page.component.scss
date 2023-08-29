@@ -1,0 +1,18 @@
+@import '/src/styles/variables.scss';
+
+.wrapper {
+  display: flex;
+  background-color: $bgColor;
+  width: 100%;
+  height: 100%;
+  color: $whiteColor;
+  .menu {
+    width: 13%;
+  }
+  .content {
+    width: 100%;
+    padding: $baseSize*4;
+  }
+}
+
+

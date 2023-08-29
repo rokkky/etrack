@@ -1,0 +1,45 @@
+@import '/src/styles/variables.scss';
+
+aside {
+  height: 100%;
+  padding: $baseSize*3 $baseSize*2;
+  background-color: $subGrayColor4;
+  h1 {
+    font-size: $fontSizeLarge;
+    span {
+      padding: $baseSize*0.5 $baseSize*1.5;
+      margin-right: $baseSize*0.5;
+      border: $baseSize*0.5 solid $accentColor;
+      border-radius: $baseBorderRadius;
+      color: $accentColor;
+    }
+  }
+  .navigation {
+    width: 100%;
+    margin-top: $baseSize*7;
+    .link {
+      display: flex;
+      align-items: center;
+      padding: $baseSize*2;
+      margin: $baseSize*4 0;
+      border-radius: $baseBorderRadius*0.5;
+      transition: background-color .2s ease-out;
+      cursor: pointer;
+      .icon {
+        margin-right: $baseSize;
+      }
+      a {
+        text-decoration: none;
+        color: $whiteColor;
+      }
+      &:hover {
+        background-color: $subGrayColor3;
+      }
+    }
+    .active {
+      background-color: $subGrayColor2;
+    }
+  }
+}
+
+

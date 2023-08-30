@@ -1,0 +1,68 @@
+@use "@angular/material" as mat;
+@include mat.core();
+
+$primary-palette: (
+  50: #fcfcfc,
+  100: #f8f8f8,
+  200: #f3f3f4,
+  300: #eeeeef,
+  400: #eaeaeb,
+  500: #e6e6e8,
+  600: #c8c8cb,
+  700: #9d9d9f,
+  800: #58585a,
+  900: #434344,
+  contrast: (
+    50: #1a1a1e,
+    100: #1a1a1e,
+    200: #1a1a1e,
+    300: #1a1a1e,
+    400: #1a1a1e,
+    500: #1a1a1e,
+    600: #1a1a1e,
+    700: #ffffff,
+    800: #ffffff,
+    900: #ffffff,
+  ),
+);
+
+$accent-palette: (
+  50: #f6ffeb,
+  100: #e9ffcc,
+  200: #daffab,
+  300: #cbff89,
+  400: #c0ff6f,
+  500: #b5ff56,
+  600: #aeff4f,
+  700: #a5ff45,
+  800: #9dff3c,
+  900: #8dff2b,
+  contrast: (
+    50 : #1a1a1e,
+    100 : #1a1a1e,
+    200 : #1a1a1e,
+    300 : #1a1a1e,
+    400 : #1a1a1e,
+    500 : #1a1a1e,
+    600 : #1a1a1e,
+    700 : #1a1a1e,
+    800 : #1a1a1e,
+    900 : #1a1a1e,
+  ),
+);
+
+$etrack-primary: mat.define-palette($primary-palette, 500);
+$etrack-accent: mat.define-palette($accent-palette, 500);
+
+$etrack-theme: mat.define-dark-theme(
+  (
+    color: (
+      primary: $etrack-primary,
+      accent: $etrack-accent,
+    ),
+    typography: mat.define-typography-config(),
+    density: 0,
+  )
+);
+
+@include mat.all-component-themes($etrack-theme);

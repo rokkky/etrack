@@ -13,7 +13,7 @@ export class SideMenuComponent {
       label: 'Home',
     },
     {
-      routerLink: '/expenses',
+      routerLink: 'expenses',
       fontIcon: 'shopping_cart',
       label: 'Expenses',
     },

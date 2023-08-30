@@ -1,9 +1,13 @@
 @import '/src/styles/variables.scss';
 
+* {
+  color: white;
+}
+
 aside {
   height: 100%;
   padding: $baseSize*3 $baseSize*2;
-  background-color: $subGrayColor4;
+  background-color: $primaryColor;
   h1 {
     font-size: $fontSizeLarge;
     span {
@@ -30,7 +34,6 @@ aside {
       }
       a {
         text-decoration: none;
-        color: $whiteColor;
       }
       &:hover {
         background-color: $subGrayColor3;

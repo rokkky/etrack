@@ -1,0 +1,9 @@
+@import '/src/styles/variables.scss';
+
+.content {
+  width: 100%;
+  height: 100%;
+  background-color: $primaryColor;
+  border-radius: $baseBorderRadius*2;
+  padding: $baseSize*4 0;
+}

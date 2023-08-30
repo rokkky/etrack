@@ -36,7 +36,7 @@ section {
       input {
         color: $lightGrayColor;
         &::placeholder {
-          color: $subGrayColor4;
+          color: $primaryColor;
         }
       }
       button {
@@ -59,7 +59,6 @@ hr {
   color: $subGrayColor2;
   text-align: center;
   span {
-    color: $whiteColor;
     text-decoration: underline;
     cursor: pointer;
   }

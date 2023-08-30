@@ -1,0 +1,20 @@
+<div class="wrapper" formGroup="searchForm">
+  <h2>{{ title }}</h2>
+
+  <mat-form-field appearance="outline" class="search-field">
+    <input matInput placeholder="Search" formControlName="searchField" />
+    <mat-icon matPrefix fontIcon="manage_search"></mat-icon>
+  </mat-form-field>
+
+  <mat-form-field appearance="outline" class="range-select">
+    <mat-select formControlName="rangeSelector" [value]="ranges[0].value">
+      <mat-option *ngFor="let range of ranges" [value]="range.value">
+        {{ range.label }}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+
+  <button mat-flat-button color="accent">
+    Add
+  </button>
+</div>

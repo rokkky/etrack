@@ -1,0 +1,8 @@
+@import '/src/styles/variables.scss';
+
+table {
+  background-color: $primaryColor;
+  * {
+    color: white;
+  }
+}

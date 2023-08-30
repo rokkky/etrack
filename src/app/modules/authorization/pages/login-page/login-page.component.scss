@@ -36,7 +36,7 @@ section {
       input {
         color: $lightGrayColor;
         &::placeholder {
-          color: $subGrayColor4;
+          color: $primaryColor;
         }
       }
       .reset-pass {
@@ -47,7 +47,6 @@ section {
         z-index: 2;
         transition: margin-top .2s ease-in-out;
         span {
-          color: $whiteColor;
           text-decoration: underline;
           cursor: pointer;
         }
@@ -73,7 +72,6 @@ hr {
   color: $subGrayColor2;
   text-align: center;
   span {
-    color: $whiteColor;
     text-decoration: underline;
     cursor: pointer;
   }

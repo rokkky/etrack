@@ -2,14 +2,16 @@
   <h1><span>E</span>Track</h1>
   <nav class="navigation">
     <ng-container *ngFor="let link of links">
-      <div class="link" routerLinkActive="active" >
+      <div
+        class="link"
+        routerLinkActive="active"
+        [routerLink]="link.routerLink"
+        [routerLinkActiveOptions]="{ exact: true }"
+      >
         <mat-icon [fontIcon]="link.fontIcon" class="icon"></mat-icon>
-        <a
-          [routerLink]="link.routerLink"
-          >{{ link.label }}
-        </a>
+        <a>{{ link.label }}</a>
       </div>
-      <hr *ngIf="link.label === 'Goals'">
+      <hr *ngIf="link.label === 'Goals'" />
     </ng-container>
   </nav>
 </aside>

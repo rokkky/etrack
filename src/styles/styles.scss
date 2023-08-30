@@ -1,22 +1,4 @@
-@use "@angular/material" as mat;
 @import "variables";
-@include mat.core();
-
-$etrack-primary: mat.define-palette($primary-palette);
-$etrack-accent: mat.define-palette($accent-palette);
-
-$etrack-theme: mat.define-light-theme(
-  (
-    color: (
-      primary: $etrack-primary,
-      accent: $etrack-accent,
-    ),
-    typography: mat.define-typography-config(),
-    density: 0,
-  )
-);
-
-@include mat.all-component-themes($etrack-theme);
 
 * {
   box-sizing: border-box;
@@ -35,26 +17,4 @@ body {
 p,
 h1 {
   margin: 0;
-}
-
-
-.mdc-notched-outline__trailing, .mdc-notched-outline__leading, .mdc-notched-outline__notch{
-  border-width: 2px !important;
-  border-color: $whiteColor !important;
-  transition: all .2s ease-in-out;
-}
-
-.mdc-text-field--invalid {
-  .mdc-notched-outline__trailing, .mdc-notched-outline__leading, .mdc-notched-outline__notch{
-    border-width: 2px !important;
-    border-color: rgb(252, 79, 79) !important;
-    transition: all .2s ease-in-out;
-  }
-}
-
-.mdc-text-field--focused {
-  .mdc-notched-outline__trailing, .mdc-notched-outline__leading, .mdc-notched-outline__notch{
-    border-width: 2px !important;
-    transition: all .2s ease-in-out;
-  }
 }

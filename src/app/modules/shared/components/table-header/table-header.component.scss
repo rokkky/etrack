@@ -1,0 +1,25 @@
+@import '/src/styles/variables.scss';
+
+.wrapper {
+  color: $whiteColor;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  padding: 0 $baseSize*4;
+  h2 {
+    margin-right: auto;
+    font-size: $fontSizeLarge;
+  }
+  .search-field {
+    margin: 0 $baseSize*2 ;
+    input {
+      color: $lightGrayColor;
+      &::placeholder {
+        color: $subGrayColor2;
+      }
+    }
+  }
+  .range-select {
+    margin: 0 $baseSize*2 ;
+  }
+}

@@ -1,15 +1,27 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { passwordValidator } from 'src/app/modules/shared/validators/password.validator';
+import { AuthorizationService } from '../../services/authorization.service';
 
 @Component({
   selector: 'app-signup-page',
   templateUrl: './signup-page.component.html',
   styleUrls: ['./signup-page.component.scss'],
 })
-export class SignupPageComponent {
-  constructor(private router: Router) {}
+export class SignupPageComponent implements OnInit {
+  formError?: string;
+
+  constructor(
+    private router: Router,
+    private authService: AuthorizationService,
+  ) {}
+
+  ngOnInit(): void {
+    this.signupForm.valueChanges.subscribe(() => {
+      this.formError = undefined;
+    });
+  }
 
   signupForm: FormGroup = new FormGroup({
     userName: new FormControl<string>('', [
@@ -34,7 +46,18 @@ export class SignupPageComponent {
     this.signupForm.markAllAsTouched();
 
     if (this.signupForm.valid) {
-      console.log(this.signupForm.value);
+      const { username, email, password } = this.signupForm.value;
+      this.authService.signup({ username, email, password }).subscribe(
+        (res) => {
+          //Timer + Notification about succesfull signup
+          if (res.data?.signUp) {
+            this.navigateToLoginPage();
+          }
+        },
+        (err) => {
+          this.formError = err.message;
+        },
+      );
     }
   }
 }

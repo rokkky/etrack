@@ -63,3 +63,15 @@ hr {
     cursor: pointer;
   }
 }
+
+.server-error {
+  color: red;
+  font-size: $fontSizeSmaller;
+  text-align: center;
+  opacity: 0;
+  transition: opacity .3s ease-in-out;
+}
+
+.shown {
+  opacity: 1;
+}

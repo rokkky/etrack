@@ -40,6 +40,7 @@
         ></app-field-error>
 
         <button mat-flat-button color="accent" (click)="signup()">Sign up</button>
+        <p class="server-error" [ngClass]="{'shown': formError}">{{formError}}</p>
       </form>
       <hr />
       <p class="login">

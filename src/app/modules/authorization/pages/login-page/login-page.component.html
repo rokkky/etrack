@@ -30,7 +30,8 @@
           <span (click)="navigateToResetPassPage()">Reset</span>
         </p>
 
-        <button mat-flat-button color="accent" (click)="loginUser()">Login</button>
+        <button mat-flat-button color="accent" (click)="loginUser()">Login</button> <!-- Directive with warn color animation -->
+        <p class="server-error" [ngClass]="{'shown': formError}">{{formError}}</p>
       </form>
       <hr />
       <p class="register">

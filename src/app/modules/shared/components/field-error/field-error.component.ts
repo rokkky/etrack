@@ -15,11 +15,14 @@ export class FieldErrorComponent {
     const errors: ValidationErrors =
       <ValidationErrors>this.control?.errors || {};
 
-    return Object.entries(errors).map(([err]) => {
-      const message = ERROR_MESSAGES[err]
-        .replace(':field:', this.fieldName)
-        .replace(':n:', this.control.getError(err)['requiredLength']);
-      return message;
-    })[0];
+    if (this.control.touched && this.control.invalid) {
+      return Object.entries(errors).map(([err]) => {
+        const message = ERROR_MESSAGES[err]
+          .replace(':field:', this.fieldName)
+          .replace(':n:', this.control.getError(err)['requiredLength']);
+        return message;
+      })[0];
+    }
+    return '';
   }
 }

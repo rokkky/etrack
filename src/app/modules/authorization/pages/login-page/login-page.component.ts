@@ -1,14 +1,26 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { AuthorizationService } from '../../services/authorization.service';
 
 @Component({
   selector: 'app-login-page',
   templateUrl: './login-page.component.html',
   styleUrls: ['./login-page.component.scss'],
 })
-export class LoginPageComponent {
-  constructor(private router: Router) {}
+export class LoginPageComponent implements OnInit {
+  formError?: string;
+
+  constructor(
+    private router: Router,
+    private authService: AuthorizationService,
+  ) {}
+
+  ngOnInit(): void {
+    this.loginForm.valueChanges.subscribe(() => {
+      this.formError = undefined;
+    });
+  }
 
   loginForm: FormGroup = new FormGroup({
     email: new FormControl<string>('', [Validators.required, Validators.email]),
@@ -27,7 +39,14 @@ export class LoginPageComponent {
     this.loginForm.markAllAsTouched();
 
     if (this.loginForm.valid) {
-      // Here should be call of api service
+      this.authService.login(this.loginForm.value).subscribe(
+        (res) => {
+          if (res) this.router.navigate(['home']);
+        },
+        (err) => {
+          this.formError = err.message;
+        },
+      );
     }
   }
 }

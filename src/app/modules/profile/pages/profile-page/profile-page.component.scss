@@ -1,0 +1,51 @@
+@import '/src/styles/variables.scss';
+
+.profile {
+  width: 100%;
+  height: 100%;
+  background-color: $primaryColor;
+  border-radius: $baseBorderRadius*2;
+  padding: $baseSize*4;
+  color: $whiteColor;
+  .page-header {
+    display: flex;
+    justify-content: space-between;
+    h1 {
+      font-size: $fontSizeLarge*1.5;
+    }
+  }
+  .username {
+    color: $accentColor;
+  }
+  .small-info {
+    font-size: $fontSizeLarge;
+    color: $subGrayColor2;
+    margin: $baseSize*4 0;
+  }
+  form {
+    width: 50%;
+    display: flex;
+    flex-direction: column;
+    .username {
+      display: flex;
+      mat-form-field {
+        width: 100%;
+      }
+      button {
+        transition: opacity .3s ease-in-out;
+      }
+    }
+    .transparent {
+      opacity: 0.2;
+    }
+  }
+  .reset-pass {
+    cursor: pointer;
+    text-decoration: underline;
+    color: $warnColor;
+    transition: color .3s ease-in-out;
+    &:hover {
+      color: $whiteColor;
+    }
+}
+}

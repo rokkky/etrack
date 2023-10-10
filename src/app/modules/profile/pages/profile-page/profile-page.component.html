@@ -1,0 +1,55 @@
+<div class="profile">
+  <div class="page-header" *ngIf="user">
+    <h1>
+      Good day, <span class="username">{{ user.username }}</span
+      >!
+    </h1>
+
+    <button mat-stroked-button color="warn" (click)="signOut()">
+      <mat-icon>logout</mat-icon>
+      Log out
+    </button>
+  </div>
+  <p class="small-info">Here's some information about your profile:</p>
+
+  <form [formGroup]="usernameField" (submit)="changeUsername()">
+    <label class="info">Username: </label>
+    <div class="username">
+      <mat-form-field appearance="outline">
+        <input type="text" matInput formControlName="username" />
+      </mat-form-field>
+      <button
+        mat-icon-button
+        [disabled]="
+          !usernameField.get('username')!.dirty ||
+          usernameField.get('username')!.invalid
+        "
+        [ngClass]="{
+          transparent:
+            !usernameField.get('username')!.dirty ||
+            usernameField.get('username')!.invalid
+        }"
+      >
+        <mat-icon>done_outline</mat-icon>
+      </button>
+    </div>
+    <app-field-error
+      [control]="usernameField.get('username')!"
+      [fieldName]="'Username'"
+    ></app-field-error>
+
+    <label class="info">Email: </label>
+    <mat-form-field appearance="outline">
+      <input type="text" matInput formControlName="email" />
+    </mat-form-field>
+
+    <label class="info">Registered: </label>
+    <mat-form-field appearance="outline">
+      <input type="text" matInput formControlName="registrationDate" />
+    </mat-form-field>
+  </form>
+
+  <p class="reset-pass" (click)="navigateToResetPassPage()">
+    Reset your password
+  </p>
+</div>

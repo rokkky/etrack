@@ -3,6 +3,7 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { passwordValidator } from 'src/app/modules/shared/validators/password.validator';
 import { AuthorizationService } from '../../services/authorization.service';
+import { passwordConfirmValidator } from 'src/app/modules/shared/validators/confirm-password.validator';
 
 @Component({
   selector: 'app-signup-page',
@@ -23,20 +24,26 @@ export class SignupPageComponent implements OnInit {
     });
   }
 
-  signupForm: FormGroup = new FormGroup({
-    userName: new FormControl<string>('', [
-      Validators.minLength(2),
-      Validators.maxLength(32),
-    ]),
-    email: new FormControl<string>('', [Validators.required, Validators.email]),
-    password: new FormControl<string>('', [
-      Validators.required,
-      Validators.minLength(8),
-      Validators.maxLength(16),
-      passwordValidator(),
-    ]),
-    confirmPassword: new FormControl<string>('', [Validators.required]),
-  });
+  signupForm: FormGroup = new FormGroup(
+    {
+      username: new FormControl<string>('', [
+        Validators.minLength(2),
+        Validators.maxLength(32),
+      ]),
+      email: new FormControl<string>('', [
+        Validators.required,
+        Validators.email,
+      ]),
+      password: new FormControl<string>('', [
+        Validators.required,
+        Validators.minLength(8),
+        Validators.maxLength(16),
+        passwordValidator(),
+      ]),
+      confirmPassword: new FormControl<string>('', [Validators.required]),
+    },
+    [passwordConfirmValidator('password', 'confirmPassword')],
+  );
 
   navigateToLoginPage(): void {
     this.router.navigate(['login']);

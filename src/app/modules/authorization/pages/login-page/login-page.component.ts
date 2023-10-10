@@ -32,7 +32,7 @@ export class LoginPageComponent implements OnInit {
   }
 
   navigateToResetPassPage(): void {
-    console.log('Here should be redirect to resset pass page');
+    //TODO: Implement router redirect to reset password page after implementation
   }
 
   loginUser(): void {

@@ -5,10 +5,10 @@
       <form [formGroup]="signupForm">
         <label>Username</label>
         <mat-form-field appearance="outline">
-          <input type="text" matInput formControlName="userName" />
+          <input type="text" matInput formControlName="username" />
         </mat-form-field>
         <app-field-error
-          [control]="signupForm.get('userName')!"
+          [control]="signupForm.get('username')!"
           [fieldName]="'Username'"
         ></app-field-error>
 
@@ -35,7 +35,14 @@
           <input type="password" matInput formControlName="confirmPassword" placeholder="********"/>
         </mat-form-field>
         <app-field-error
+          #confirmPassErr
           [control]="signupForm.get('confirmPassword')!"
+          [fieldName]="'Confirm password'"
+        ></app-field-error>
+
+        <app-field-error
+          *ngIf="!signupForm.get('confirmPassword')!.errors"
+          [control]="signupForm"
           [fieldName]="'Confirm password'"
         ></app-field-error>
 

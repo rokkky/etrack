@@ -5,6 +5,7 @@ import { HomeRoutingModule } from './home-routing.module';
 import { CoreModule } from '../core/core.module';
 import { RouterModule } from '@angular/router';
 import { ExpensesModule } from '../expenses/expenses.module';
+import { ProfileModule } from '../profile/profile.module';
 
 @NgModule({
   declarations: [HomePageComponent],
@@ -14,6 +15,7 @@ import { ExpensesModule } from '../expenses/expenses.module';
     CoreModule,
     HomeRoutingModule,
     ExpensesModule,
+    ProfileModule,
   ],
   exports: [HomePageComponent],
 })

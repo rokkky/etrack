@@ -28,7 +28,7 @@ export class SideMenuComponent {
       label: 'Goals',
     },
     {
-      routerLink: '/profile',
+      routerLink: 'profile',
       fontIcon: 'account_circle',
       label: 'Profile',
     },

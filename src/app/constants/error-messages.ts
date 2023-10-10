@@ -7,5 +7,6 @@ export const ERROR_MESSAGES: IErrorMessage = {
   required: '":field:" is required field',
   minlength: '":field:" must contatin at least :n: characters',
   maxlength: '":field:" must contatin max :n: characters',
-  password: 'Pssword should contain 1 number, 1 upper and 1 lower case letter',
+  password: 'Password should contain 1 number, 1 upper and 1 lower case letter',
+  passMismatch: 'Passwords mismatch',
 };

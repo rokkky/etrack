@@ -1,0 +1,80 @@
+@import "/src/styles/variables.scss";
+
+:host {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.table-header {
+  color: $whiteColor;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  padding-right: $baseSize * 4;
+  h2 {
+    margin-right: auto;
+    font-size: $fontSizeLarge;
+  }
+  button {
+    font-size: $fontSize;
+  }
+
+  .search-field {
+    margin: 0 $baseSize * 2;
+    input {
+      color: $lightGrayColor;
+      &::placeholder {
+        color: $subGrayColor2;
+      }
+    }
+  }
+  .range-select {
+    margin: 0 $baseSize * 2;
+  }
+}
+
+mat-spinner {
+  margin: $baseSize * 5 auto;
+}
+
+.table-wrapper {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  table {
+    background-color: $primaryColor;
+    * {
+      color: white;
+    }
+  }
+  &_spinner {
+    position: absolute;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: $primaryColor;
+    z-index: 1;
+    opacity: 0.8;
+    left: 0;
+    top: 0;
+    right: 0;
+    bottom: 0;
+  }
+  .paginator {
+    margin-top: auto;
+  }
+}
+
+.hidden {
+  display: none;
+}
+
+.expense-transaction {
+  color: $warnColor !important;
+}
+
+.income-transaction {
+  color: $accentColor !important;
+}

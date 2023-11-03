@@ -25,7 +25,9 @@ export function createApollo(
   router: Router,
 ): ApolloClientOptions<unknown> {
   const apolloLink = httpLink.create({ uri });
-  const cache = new InMemoryCache();
+  const cache = new InMemoryCache({
+    addTypename: false,
+  });
 
   const getNewToken = () => {
     const refreshToken = storageService.getItem('refreshToken');

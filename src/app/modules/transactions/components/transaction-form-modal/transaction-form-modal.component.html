@@ -1,0 +1,85 @@
+<div class="dialog-header">
+  <h1 mat-dialog-title>New expense</h1>
+  <button mat-icon-button tabindex="-1" mat-dialog-close>
+    <mat-icon>close</mat-icon>
+  </button>
+</div>
+<mat-dialog-content [formGroup]="transactionForm">
+  <mat-button-toggle-group
+    formControlName="type"
+    class="category-toggle"
+    color="accent"
+    (change)="onCategoryChange($event.value)"
+  >
+    <mat-button-toggle [value]="togglerTypes.expense">{{
+      togglerTypes.expense
+    }}</mat-button-toggle>
+    <mat-button-toggle [value]="togglerTypes.income">{{
+      togglerTypes.income
+    }}</mat-button-toggle>
+  </mat-button-toggle-group>
+
+  <div [formGroup]="transactionForm" class="inputs-group">
+    <label>Description</label>
+    <mat-form-field appearance="outline">
+      <input type="text" matInput formControlName="description" />
+    </mat-form-field>
+    <app-field-error
+      [control]="transactionForm.get('description')!"
+      [fieldName]="'Description'"
+    ></app-field-error>
+
+    <label>Category</label>
+    <mat-form-field appearance="outline" class="range-select">
+      <mat-select formControlName="category">
+        <mat-option
+          *ngFor="let category of categories"
+          [value]="category.id"
+        >
+          {{ category.name }}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <label>Amount</label>
+    <mat-form-field appearance="outline">
+      <input type="number" matInput formControlName="amount" />
+    </mat-form-field>
+    <app-field-error
+      [control]="transactionForm.get('amount')!"
+      [fieldName]="'Amount'"
+    ></app-field-error>
+
+    <label>Date</label>
+    <mat-form-field appearance="outline" (click)="datePicker.open()">
+      <input
+        matInput
+        readonly
+        [matDatepicker]="datePicker"
+        [min]="minDate"
+        [max]="currentDate"
+        class="date-picker"
+        formControlName="date"
+      />
+      <mat-datepicker-toggle
+        matIconSuffix
+        [for]="datePicker"
+      ></mat-datepicker-toggle>
+      <mat-datepicker color="accent" #datePicker></mat-datepicker>
+    </mat-form-field>
+    <app-field-error
+      [control]="transactionForm.get('date')!"
+      [fieldName]="'Date'"
+    ></app-field-error>
+  </div>
+</mat-dialog-content>
+<mat-dialog-actions>
+  <button
+    mat-raised-button
+    color="accent"
+    class="save-btn"
+    (click)="saveTransaction()"
+  >
+    Save
+  </button>
+</mat-dialog-actions>

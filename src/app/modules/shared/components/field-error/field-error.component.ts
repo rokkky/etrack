@@ -19,7 +19,12 @@ export class FieldErrorComponent {
       return Object.entries(errors).map(([err]) => {
         const message = ERROR_MESSAGES[err]
           .replace(':field:', this.fieldName)
-          .replace(':n:', this.control.getError(err)['requiredLength']);
+          .replace(
+            ':n:',
+            this.control.getError(err)['requiredLength'] ||
+              this.control.getError(err)['max'] ||
+              this.control.getError(err)['min'],
+          );
         return message;
       })[0];
     }

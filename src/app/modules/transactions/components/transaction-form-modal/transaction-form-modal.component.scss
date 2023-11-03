@@ -1,0 +1,43 @@
+@import "/src/styles/variables.scss";
+
+.dialog-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  button {
+    color: $whiteColor;
+  }
+}
+
+.inputs-group {
+  display: flex;
+  flex-direction: column;
+  label {
+    color: $whiteColor;
+  }
+}
+
+.date-picker {
+  cursor: pointer;
+}
+
+.save-btn {
+  width: 100%;
+  margin: 0 $baseSize * 3 $baseSize * 3;
+}
+
+.category-toggle {
+  margin-bottom: $baseSize * 4;
+}
+
+.mat-button-toggle-group {
+  width: 100%;
+  .mat-button-toggle {
+    width: 50%;
+  }
+}
+
+.mat-button-toggle-checked {
+  background-color: $accentColor;
+  color: $primaryColor;
+}

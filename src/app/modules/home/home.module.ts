@@ -4,8 +4,8 @@ import { HomePageComponent } from './pages/home-page/home-page.component';
 import { HomeRoutingModule } from './home-routing.module';
 import { CoreModule } from '../core/core.module';
 import { RouterModule } from '@angular/router';
-import { ExpensesModule } from '../expenses/expenses.module';
 import { ProfileModule } from '../profile/profile.module';
+import { TransactionsModule } from '../transactions/transactions.module';
 
 @NgModule({
   declarations: [HomePageComponent],
@@ -13,8 +13,8 @@ import { ProfileModule } from '../profile/profile.module';
     CommonModule,
     RouterModule,
     CoreModule,
+    TransactionsModule,
     HomeRoutingModule,
-    ExpensesModule,
     ProfileModule,
   ],
   exports: [HomePageComponent],

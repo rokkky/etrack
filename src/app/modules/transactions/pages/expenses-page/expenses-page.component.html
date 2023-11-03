@@ -1,0 +1,13 @@
+<div class="expenses-table">
+  <h2 class="expenses-table_header">Your latest expenses</h2>
+  <app-transactions-table
+    class="table"
+    [dataSource]="expenses"
+    [isLoading]="isLoading"
+    [paginatorLength]="paginatorLength"
+    (addTransactionClicked)="openAddExpenseModal()"
+    (filterStateChanged)="getTransactionsList($event)"
+  >
+  </app-transactions-table>
+</div>
+

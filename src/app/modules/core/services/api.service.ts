@@ -8,10 +8,15 @@ import { DocumentNode } from 'graphql';
 export class ApiService {
   constructor(private apollo: Apollo) {}
 
-  query<R, V extends object>(query: DocumentNode, input?: V) {
+  query<R, V extends object>(
+    query: DocumentNode,
+    input?: V,
+    disableCache?: boolean,
+  ) {
     return this.apollo.query<R>({
       query: query,
       variables: input,
+      fetchPolicy: disableCache ? 'no-cache' : 'cache-first',
     });
   }
 

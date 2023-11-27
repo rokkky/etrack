@@ -1,1 +1,12 @@
-<p>incomes-page works!</p>
+<div class="incomes-table">
+  <h2 class="incomes-table_header">Your latest incomes</h2>
+  <app-transactions-table
+    [dataSource]="incomes"
+    [isLoading]="isLoading"
+    [paginatorLength]="paginatorLength"
+    (addTransactionClicked)="openAddIncomeModal()"
+    (filterStateChanged)="getTransactionsList($event)"
+  >
+  </app-transactions-table>
+</div>
+

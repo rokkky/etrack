@@ -23,6 +23,7 @@ import {
   MomentDateAdapter,
   MAT_MOMENT_DATE_ADAPTER_OPTIONS,
 } from '@angular/material-moment-adapter';
+import { CategoryFormModalComponent } from './components/category-form-modal/category-form-modal.component';
 
 @NgModule({
   declarations: [
@@ -30,6 +31,7 @@ import {
     IncomesPageComponent,
     TransactionFormModalComponent,
     TransactionsTableComponent,
+    CategoryFormModalComponent,
   ],
   imports: [
     CommonModule,

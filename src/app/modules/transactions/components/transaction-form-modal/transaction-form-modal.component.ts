@@ -1,7 +1,15 @@
 import { Component, EventEmitter, Inject, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
-import { ITransactionCategory } from '../../types/transaction-category.interface';
+import {
+  MAT_DIALOG_DATA,
+  MatDialog,
+  MatDialogRef,
+} from '@angular/material/dialog';
+import {
+  ITransactionCategory,
+  ITransactionCategoryCreation,
+} from '../../types/transaction-category.interface';
+import { CategoryFormModalComponent } from '../category-form-modal/category-form-modal.component';
 import { TransactionTypes } from '../../types/transaction-types.enum';
 import { MAT_DATE_FORMATS } from '@angular/material/core';
 import * as _moment from 'moment';
@@ -22,7 +30,10 @@ const moment = _rollupMoment || _moment;
   ],
 })
 export class TransactionFormModalComponent implements OnInit {
-  @Output() categoryChanged: EventEmitter<string> = new EventEmitter();
+  @Output() categoryTypeChanged: EventEmitter<TransactionTypes> =
+    new EventEmitter();
+  @Output() categoryAdded: EventEmitter<ITransactionCategoryCreation> =
+    new EventEmitter();
 
   togglerTypes = TransactionTypes;
 
@@ -37,6 +48,7 @@ export class TransactionFormModalComponent implements OnInit {
   constructor(
     private fb: FormBuilder,
     private dialogRef: MatDialogRef<TransactionFormModalComponent>,
+    private dialog: MatDialog,
     @Inject(MAT_DIALOG_DATA)
     public data: {
       categories: ITransactionCategory[];
@@ -56,11 +68,11 @@ export class TransactionFormModalComponent implements OnInit {
       ],
       date: [this.currentDate, [Validators.required]],
     });
-    this.setDefaultCategory();
+    this.setCategory();
   }
 
-  onCategoryChange(category: string): void {
-    this.categoryChanged.emit(category);
+  onCategoryChange(category: TransactionTypes): void {
+    this.categoryTypeChanged.emit(category);
   }
 
   saveTransaction(): void {
@@ -70,11 +82,34 @@ export class TransactionFormModalComponent implements OnInit {
     }
   }
 
-  setDefaultCategory(): void {
+  setCategory(categoryName: string = this.defautCategory): void {
     const selectedCategory =
       this.categories.find((category) => {
-        return category.name === this.defautCategory;
+        return category.name === categoryName;
       })?.id || this.categories[0].id;
     this.transactionForm.get('category')?.setValue(selectedCategory);
+  }
+
+  openCategoryModal() {
+    const dialogRef = this.dialog.open(CategoryFormModalComponent, {
+      width: '300px',
+    });
+
+    dialogRef.componentInstance.categoryAdded.subscribe((name) => {
+      const isCategoryExist = this.categories.find(
+        (category) => category.name === name,
+      );
+      if (isCategoryExist) {
+        dialogRef.componentInstance.categoryName.setErrors({
+          sameCategoryName: true,
+        });
+      } else {
+        this.categoryAdded.emit({
+          name,
+          type: this.transactionForm.get('type')!.value,
+        });
+        dialogRef.close();
+      }
+    });
   }
 }

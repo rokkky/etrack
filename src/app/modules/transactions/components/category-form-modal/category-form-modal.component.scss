@@ -1,0 +1,22 @@
+@import "/src/styles/variables.scss";
+
+.dialog-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  button {
+    color: $whiteColor;
+  }
+}
+
+.form-content {
+  padding-top: 0;
+  padding-bottom: 0;
+  mat-form-field {
+    width: 100%;
+  }
+}
+
+.save-btn {
+  width: 100%;
+}

@@ -1,0 +1,18 @@
+<div class="dialog-header">
+  <h1 mat-dialog-title>New category</h1>
+  <button mat-icon-button tabindex="-1" mat-dialog-close>
+    <mat-icon>close</mat-icon>
+  </button>
+</div>
+<mat-dialog-content class="form-content">
+  <mat-form-field appearance="outline">
+    <input type="text" matInput [formControl]="categoryName" placeholder="Category name"/>
+  </mat-form-field>
+  <app-field-error
+    [control]="categoryName"
+    [fieldName]="'Category name'"
+  ></app-field-error>
+</mat-dialog-content>
+<mat-dialog-actions>
+  <button mat-raised-button color="accent" class="save-btn" (click)="saveCategory()">Save</button>
+</mat-dialog-actions>

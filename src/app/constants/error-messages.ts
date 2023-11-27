@@ -11,4 +11,5 @@ export const ERROR_MESSAGES: IErrorMessage = {
   min: '":field:" should be at least :n:',
   password: 'Password must contain 1 number, 1 upper and 1 lower case letter',
   passMismatch: 'Passwords mismatch',
+  sameCategoryName: 'This category already exists',
 };

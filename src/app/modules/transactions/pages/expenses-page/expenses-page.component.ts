@@ -1,17 +1,16 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { TransactionFormModalComponent } from 'src/app/modules/transactions/components/transaction-form-modal/transaction-form-modal.component';
-import { ITransactionCategory } from 'src/app/modules/transactions/types/transaction-category.interface';
+import {
+  ITransactionCategory,
+  ITransactionCategoryCreation,
+} from 'src/app/modules/transactions/types/transaction-category.interface';
 import { TransactionsService } from '../../services/transactions.service';
 import { TransactionTypes } from '../../types/transaction-types.enum';
 import { ITransaction } from '../../types/transaction.interface';
 import { Subject, filter, mergeMap, switchMap } from 'rxjs';
 import { IFilterState } from '../../types/filter-state.interface';
-
-const MODAL_CONFIG = {
-  width: '400px',
-  height: 'auto',
-};
+import { DEFAULT_MODAL_CONFIG } from '../../components/transactions-table/transactions-table.component';
 
 @Component({
   selector: 'app-expenses-page',
@@ -42,7 +41,6 @@ export class ExpensesPageComponent implements OnInit {
     this.transactionsApiCall$
       .pipe(
         switchMap((filter) => {
-          this.isLoading = true;
           return this.transactionsService.getTransactions(
             filter,
             this.displayingCategory,
@@ -62,7 +60,7 @@ export class ExpensesPageComponent implements OnInit {
         categories: this.currentCategories,
         transactionType: TransactionTypes.expense,
       },
-      ...MODAL_CONFIG,
+      ...DEFAULT_MODAL_CONFIG,
     });
     const componentInstance = dialogRef.componentInstance;
 
@@ -74,21 +72,37 @@ export class ExpensesPageComponent implements OnInit {
       )
       .subscribe(() => this.getTransactionsList(this.filterState));
 
-    componentInstance.categoryChanged.subscribe((category) => {
-      this.currentCategories = this.sortCategories(category);
-      componentInstance.categories = this.currentCategories;
-      componentInstance.setDefaultCategory();
-    });
+    componentInstance.categoryTypeChanged.subscribe(
+      (type: TransactionTypes) => {
+        this.currentCategories = this.sortCategories(type);
+        componentInstance.categories = this.currentCategories;
+        componentInstance.setCategory();
+      },
+    );
+    componentInstance.categoryAdded
+      .pipe(
+        mergeMap((categoryData: ITransactionCategoryCreation) =>
+          this.transactionsService.createCategory(categoryData),
+        ),
+      )
+      .subscribe((res) => {
+        const category = res.data!.createCategory;
+        this.categories = [...this.categories, category];
+        this.currentCategories = this.sortCategories(category.type);
+        componentInstance.categories = this.currentCategories;
+        componentInstance.setCategory(category.name);
+      });
   }
 
   getTransactionsList(filterState: IFilterState): void {
+    this.isLoading = true;
     this.filterState = filterState;
     this.transactionsApiCall$.next(this.filterState);
   }
 
-  private sortCategories(category: string): ITransactionCategory[] {
+  private sortCategories(type: string): ITransactionCategory[] {
     return this.categories.filter((cat) => {
-      return cat.type === category;
+      return cat.type === type;
     });
   }
 }

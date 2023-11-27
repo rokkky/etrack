@@ -1,7 +1,7 @@
 <div class="table-header" [formGroup]="searchForm">
-  <button mat-button color="accent" (click)="onAddTransactionClick()">
+  <button mat-flat-button color="accent" (click)="onAddTransactionClick()">
     <mat-icon>add</mat-icon>
-    Add
+    ADD
   </button>
 
   <mat-form-field appearance="outline" class="search-field">
@@ -60,7 +60,7 @@
       </ng-container>
 
       <tr mat-header-row *matHeaderRowDef="columns"></tr>
-      <tr mat-row *matRowDef="let row; columns: columns"></tr>
+      <tr mat-row *matRowDef="let row; columns: columns" (click)="onRowClick(row)" class="transaction-row"></tr>
     </ng-container>
   </table>
   <mat-paginator

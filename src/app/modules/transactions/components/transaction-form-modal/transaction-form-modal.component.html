@@ -19,7 +19,7 @@
     }}</mat-button-toggle>
   </mat-button-toggle-group>
 
-  <div [formGroup]="transactionForm" class="inputs-group">
+  <div class="inputs-group">
     <label>Description</label>
     <mat-form-field appearance="outline">
       <input type="text" matInput formControlName="description" />
@@ -30,14 +30,15 @@
     ></app-field-error>
 
     <label>Category</label>
-    <mat-form-field appearance="outline" class="range-select">
+    <mat-form-field appearance="outline">
       <mat-select formControlName="category">
-        <mat-option
-          *ngFor="let category of categories"
-          [value]="category.id"
-        >
+        <mat-option *ngFor="let category of categories" [value]="category.id">
           {{ category.name }}
         </mat-option>
+        <button mat-button (click)="openCategoryModal()" class="category-btn" color="accent">
+          <mat-icon>add</mat-icon>
+          New category
+        </button>
       </mat-select>
     </mat-form-field>
 

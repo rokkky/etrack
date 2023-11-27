@@ -18,6 +18,12 @@ import {
   IGetTransactionsVariables,
 } from 'src/app/graphql/types/get-transactions.types';
 import { GET_TRANSACTIONS } from 'src/app/graphql/query/get-transactions.query';
+import { ITransactionCategoryCreation } from '../types/transaction-category.interface';
+import {
+  CreateCategoryResponse,
+  CreateCategoryVariables,
+} from 'src/app/graphql/types/create-category.types';
+import { CREATE_CATEGORY } from 'src/app/graphql/mutations/create-category.mutation';
 
 @Injectable({
   providedIn: 'root',
@@ -29,7 +35,7 @@ export class TransactionsService {
   ) {}
 
   getUserCategories() {
-    const userId = this.storage.getItem('userId');
+    const userId = this.getUserId();
     return this.api.query<
       GetUserCategoriesResponse,
       GetUserCategoriesVariables
@@ -37,7 +43,7 @@ export class TransactionsService {
   }
 
   getTransactions(filterState: IFilterState, type: string) {
-    const userId = this.storage.getItem('userId');
+    const userId = this.getUserId();
     return this.api.query<IGetTransactionsResponse, IGetTransactionsVariables>(
       GET_TRANSACTIONS,
       { input: { filter: filterState, user: userId, type } },
@@ -45,11 +51,23 @@ export class TransactionsService {
     );
   }
 
+  createCategory(input: ITransactionCategoryCreation) {
+    const userId = this.getUserId();
+    return this.api.mutate<CreateCategoryResponse, CreateCategoryVariables>(
+      CREATE_CATEGORY,
+      { input: { ...input, user: userId } },
+    );
+  }
+
   createTransaction(input: ITransactionFormInput) {
-    const userId = this.storage.getItem('userId');
+    const userId = this.getUserId();
     return this.api.mutate<
       CreateTransactionResponse,
       CreateTransactionVariables
     >(CREATE_TRANSACTION, { input: { ...input, user: userId } });
+  }
+
+  private getUserId(): string {
+    return this.storage.getItem('userId');
   }
 }

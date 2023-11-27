@@ -18,12 +18,12 @@ export class SideMenuComponent {
       label: 'Expenses',
     },
     {
-      routerLink: '/income',
+      routerLink: 'incomes',
       fontIcon: 'attach_money',
       label: 'Income',
     },
     {
-      routerLink: '/goals',
+      routerLink: 'goals',
       fontIcon: 'savings',
       label: 'Goals',
     },

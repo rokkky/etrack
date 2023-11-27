@@ -22,6 +22,11 @@ type PeriodSelect = {
   label: string;
 };
 
+export const DEFAULT_MODAL_CONFIG = {
+  width: '400px',
+  height: 'auto',
+};
+
 @Component({
   selector: 'app-transactions-table',
   templateUrl: './transactions-table.component.html',
@@ -36,6 +41,7 @@ export class TransactionsTableComponent implements AfterViewInit {
   @Output() tableReady: EventEmitter<IFilterState> = new EventEmitter();
   @Output() filterStateChanged: EventEmitter<IFilterState> = new EventEmitter();
   @Output() addTransactionClicked: EventEmitter<void> = new EventEmitter();
+  @Output() rowClicked: EventEmitter<ITransaction> = new EventEmitter();
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
@@ -90,6 +96,10 @@ export class TransactionsTableComponent implements AfterViewInit {
 
   onAddTransactionClick(): void {
     this.addTransactionClicked.emit();
+  }
+
+  onRowClick(transaction: ITransaction) {
+    this.rowClicked.emit(transaction);
   }
 
   private emitFilterStateChange(): void {

@@ -11,12 +11,15 @@ export const GET_TRANSACTIONS = gql<
   query getTransactions($input: GetTransactionsInput) {
     getTransactions(input: $input) {
       transactions {
+        id
         type
         date
         description
         amount
         category {
+          id
           name
+          type
         }
       }
       transactionsLength

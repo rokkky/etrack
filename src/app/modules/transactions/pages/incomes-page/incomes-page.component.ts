@@ -52,7 +52,6 @@ export class IncomesPageComponent implements OnInit {
   }
 
   openAddIncomeModal(): void {
-    console.log('');
     const dialogRef = this.dialog.open(TransactionFormModalComponent, {
       data: {
         categories: this.currentCategories,
@@ -75,6 +74,52 @@ export class IncomesPageComponent implements OnInit {
       componentInstance.categories = this.currentCategories;
       componentInstance.setCategory();
     });
+  }
+
+  openEditIncomeModal(transaction: ITransaction): void {
+    console.log(transaction);
+    const dialogRef = this.dialog.open(TransactionFormModalComponent, {
+      data: {
+        categories: this.currentCategories,
+        transactionType: TransactionTypes.income,
+        transactionData: transaction,
+      },
+      ...DEFAULT_MODAL_CONFIG,
+    });
+    const componentInstance = dialogRef.componentInstance;
+
+    dialogRef
+      .afterClosed()
+      .pipe(
+        filter((data) => !!data),
+        mergeMap((data) =>
+          this.transactionsService.editTransaction({
+            ...data,
+            id: transaction.id,
+          }),
+        ),
+      )
+      .subscribe(() => this.getTransactionsList(this.filterState));
+
+    componentInstance.categoryTypeChanged.subscribe((type) => {
+      this.currentCategories = this.sortCategories(type);
+      componentInstance.categories = this.currentCategories;
+
+      const settingCategoryName =
+        transaction.category.type === type
+          ? transaction.category.name
+          : undefined;
+      componentInstance.setCategory(settingCategoryName);
+    });
+
+    componentInstance.deleteBtnClicked
+      .pipe(
+        mergeMap((id) => {
+          dialogRef.close();
+          return this.transactionsService.deleteTransaction(id);
+        }),
+      )
+      .subscribe(() => this.getTransactionsList(this.filterState));
   }
 
   getTransactionsList(filterState: IFilterState): void {

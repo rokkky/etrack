@@ -34,8 +34,11 @@ export class TransactionFormModalComponent implements OnInit {
     new EventEmitter();
   @Output() categoryAdded: EventEmitter<ITransactionCategoryCreation> =
     new EventEmitter();
+  @Output() deleteBtnClicked: EventEmitter<string> = new EventEmitter();
 
   togglerTypes = TransactionTypes;
+  formTitle: string = 'New transaction';
+  isDeletable: boolean = false;
 
   currentDate = moment();
   minDate = MIN_DATEPICKER_DATE;
@@ -53,10 +56,14 @@ export class TransactionFormModalComponent implements OnInit {
     public data: {
       categories: ITransactionCategory[];
       transactionType: TransactionTypes;
-      data?: ITransaction;
+      transactionData?: ITransaction;
     },
   ) {}
   ngOnInit(): void {
+    if (this.data.transactionData) {
+      this.formTitle = 'Edit transaction';
+      this.isDeletable = true;
+    }
     this.categories = this.data.categories;
     this.transactionForm = this.fb.group({
       type: [this.data.transactionType],
@@ -68,17 +75,35 @@ export class TransactionFormModalComponent implements OnInit {
       ],
       date: [this.currentDate, [Validators.required]],
     });
-    this.setCategory();
+
+    if (this.data.transactionData) {
+      const category = this.data.transactionData.category.id;
+      this.transactionForm.patchValue({
+        ...this.data.transactionData,
+        category,
+      });
+    } else {
+      this.setCategory();
+    }
   }
 
   onCategoryChange(category: TransactionTypes): void {
     this.categoryTypeChanged.emit(category);
   }
 
+  onDeleteBtnClick(): void {
+    console.log(this.data.transactionData!.id);
+    this.deleteBtnClicked.emit(this.data.transactionData!.id);
+  }
+
   saveTransaction(): void {
     this.transactionForm.markAllAsTouched();
     if (this.transactionForm.valid) {
-      this.dialogRef.close(this.transactionForm.value);
+      if (this.transactionForm.dirty) {
+        this.dialogRef.close(this.transactionForm.value);
+      } else {
+        this.dialogRef.close();
+      }
     }
   }
 

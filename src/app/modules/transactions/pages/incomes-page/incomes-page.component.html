@@ -6,6 +6,7 @@
     [paginatorLength]="paginatorLength"
     (addTransactionClicked)="openAddIncomeModal()"
     (filterStateChanged)="getTransactionsList($event)"
+    (rowClicked)="openEditIncomeModal($event)"
   >
   </app-transactions-table>
 </div>

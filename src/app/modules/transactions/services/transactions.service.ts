@@ -24,6 +24,14 @@ import {
   CreateCategoryVariables,
 } from 'src/app/graphql/types/create-category.types';
 import { CREATE_CATEGORY } from 'src/app/graphql/mutations/create-category.mutation';
+import { of } from 'rxjs';
+import {
+  EditTransactionResponse,
+  EditTransactionVariables,
+} from 'src/app/graphql/types/edit-transaction.types';
+import { EDIT_TRANSACTION } from 'src/app/graphql/mutations/edit-transaction.mutation';
+import { DELETE_TRANSACTION } from 'src/app/graphql/mutations/delete-transaction.mutation';
+import { DeleteTransactionResponse, DeleteTransactionVariables } from 'src/app/graphql/types/delete-transaction.types';
 
 @Injectable({
   providedIn: 'root',
@@ -65,6 +73,21 @@ export class TransactionsService {
       CreateTransactionResponse,
       CreateTransactionVariables
     >(CREATE_TRANSACTION, { input: { ...input, user: userId } });
+  }
+
+  editTransaction(input: ITransactionFormInput) {
+    const userId = this.getUserId();
+    return this.api.mutate<EditTransactionResponse, EditTransactionVariables>(
+      EDIT_TRANSACTION,
+      { input: { ...input, user: userId } },
+    );
+  }
+
+  deleteTransaction(id: string) {
+    return this.api.mutate<
+      DeleteTransactionResponse,
+      DeleteTransactionVariables
+    >(DELETE_TRANSACTION, { id });
   }
 
   private getUserId(): string {
